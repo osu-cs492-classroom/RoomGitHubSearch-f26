@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/github_search">
+
+    <fragment
+        android:id="@+id/github_search"
+        android:name="edu.oregonstate.cs492.roomgithubsearch.ui.GitHubSearchFragment"
+        android:label="@string/label_github_search">
+        <action
+            android:id="@+id/navigate_to_repo_detail"
+            app:destination="@id/repo_detail"/>
+        <action
+            android:id="@+id/navigate_to_bookmarks"
+            app:destination="@id/bookmarks" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/repo_detail"
+        android:name="edu.oregonstate.cs492.roomgithubsearch.ui.GitHubRepoDetailFragment"
+        android:label="@string/label_repo_details">
+        <argument
+            android:name="repo"
+            app:argType="edu.oregonstate.cs492.roomgithubsearch.data.GitHubRepo" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/bookmarks"
+        android:name="edu.oregonstate.cs492.roomgithubsearch.ui.BookmarkedReposFragment"
+        android:label="@string/label_bookmarks">
+        <action
+            android:id="@+id/navigate_to_repo_detail"
+            app:destination="@id/repo_detail"/>
+    </fragment>
+
+</navigation>
