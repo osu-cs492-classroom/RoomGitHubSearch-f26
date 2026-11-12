@@ -5,12 +5,14 @@ import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.button.MaterialButton
 import edu.oregonstate.cs492.roomgithubsearch.R
 
 class GitHubRepoDetailFragment : Fragment(R.layout.fragment_github_repo_detail) {
     private val args: GitHubRepoDetailFragmentArgs by navArgs()
+    private val viewModel: BookmarkedReposViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -27,6 +29,10 @@ class GitHubRepoDetailFragment : Fragment(R.layout.fragment_github_repo_detail) 
 
         bookmarkButton.addOnCheckedChangeListener { _, isChecked ->
             Log.d("GitHubRepoDetailFragment", "${args.repo.name} bookmarked: ${isChecked}")
+            when (isChecked) {
+                true -> viewModel.addBookmarkedRepo(args.repo)
+                false -> viewModel.removeBookmarkedRepo(args.repo)
+            }
         }
     }
 }

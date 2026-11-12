@@ -57,9 +57,9 @@ dependencies {
 
     // New dependencies for this topic
     implementation(libs.ksp.symbol.processing.api)
-    implementation(libs.androidx.room.runtime)
-    implementation(libs.androidx.room.ktx)
-    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room3.runtime)
+//    implementation(libs.androidx.room3.ktx)
+    ksp(libs.androidx.room3.compiler)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)
