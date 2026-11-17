@@ -2,6 +2,7 @@ package edu.oregonstate.cs492.roomgithubsearch.ui
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import edu.oregonstate.cs492.roomgithubsearch.data.AppDatabase
 import edu.oregonstate.cs492.roomgithubsearch.data.BookmarkedReposRepository
@@ -12,6 +13,8 @@ class BookmarkedReposViewModel(application: Application) : AndroidViewModel(appl
     private val repository = BookmarkedReposRepository(
         AppDatabase.getInstance(application).gitHubRepoDao()
     )
+
+    val bookmarkedRepos = repository.getAllBookmarkedRepos().asLiveData()
 
     fun addBookmarkedRepo(repo: GitHubRepo) {
         viewModelScope.launch {
@@ -24,4 +27,6 @@ class BookmarkedReposViewModel(application: Application) : AndroidViewModel(appl
             repository.deleteBookmarkedRepo(repo)
         }
     }
+
+    fun getBookmarkedRepoByName(name: String) = repository.getBookmarkedRepoByName(name).asLiveData()
 }

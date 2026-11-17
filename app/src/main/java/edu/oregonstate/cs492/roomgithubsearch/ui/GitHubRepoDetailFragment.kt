@@ -27,6 +27,13 @@ class GitHubRepoDetailFragment : Fragment(R.layout.fragment_github_repo_detail) 
         repoDescriptionTV.text = args.repo.description
         bookmarkButton.isChecked = false
 
+        viewModel.getBookmarkedRepoByName(args.repo.name).observe(viewLifecycleOwner) { repo ->
+            when (repo) {
+                null -> bookmarkButton.isChecked = false
+                else -> bookmarkButton.isChecked = true
+            }
+        }
+
         bookmarkButton.addOnCheckedChangeListener { _, isChecked ->
             Log.d("GitHubRepoDetailFragment", "${args.repo.name} bookmarked: ${isChecked}")
             when (isChecked) {
